@@ -8,20 +8,25 @@ public class PlayerController : MonoBehaviour
 {
 
     public Camera cam;
-    public Transform pointerObj;
+    // public Transform pointerObj;
     public GameObject wizard;
     public Transform firePoint;
     public Transform fireball;
     private Rigidbody playerRigidbody;
     private PlayerInputAction playerInput;
     private Animator animator;
+    bool facingRight;
+
+    [SerializeField] Transform groundCheck;
+    [SerializeField] float groundCheckRadius = 0.2f;
+    [SerializeField] LayerMask groundLayer;
+
+    bool isGrounded;
 
     public float playerSpeed = 4f;
     public float jumpForce = 4f;
 
     private bool isRunning;
-    private bool isJumping;
-
     private float shootingRange = 5f;
 
     void Awake()
@@ -44,10 +49,6 @@ public class PlayerController : MonoBehaviour
     {
 
         Movement();
-
-        
-
-
         
     }
 
@@ -55,32 +56,14 @@ public class PlayerController : MonoBehaviour
 
     void Movement()
     {
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+
         float move = playerInput.CharacterControls.Move.ReadValue <float>();
 
         bool jumpPressed = playerInput.CharacterControls.Jump.triggered;
         bool shootPressed = playerInput.CharacterControls.Attack.triggered;
 
-
-
-
-        //--------------------------------------------------------
-    //    Vector3 mousePos = Mouse.current.position.ReadValue();
-     //   mousePos.z = 5f;
-    //    Vector3 worldMousePos = cam.ScreenToWorldPoint(mousePos);
-    //    worldMousePos.z = 0;
-    //    Vector3 firingAngle =  worldMousePos - transform.position.normalized;
-    //        
-    //    Debug.Log("mousePostoworld " + worldMousePos);
-
-        // Debug.Log(Vector3.Angle(transform.position, worldMousePos));
-     //   Vector3 angle = Vector3.zero;
-    //    angle.z = Vector3.Angle(transform.position, worldMousePos) - 90;
-    //    Quaternion quaternion = Quaternion.Euler(0,0,angle.z);
-    //    pointerObj.rotation = quaternion;
-
-
-
-
+        Debug.Log(!isGrounded);
 
         transform.Translate(Vector3.left * move * playerSpeed * Time.deltaTime);
         if(move == -1)
@@ -96,24 +79,20 @@ public class PlayerController : MonoBehaviour
         {
             isRunning = false;
         }
-        if (jumpPressed)
-        {
-            isJumping = true;
-            playerRigidbody.AddForce(Vector2.up * jumpForce, ForceMode.Impulse);
-            
+        if (jumpPressed && isGrounded)
+{
+            playerRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
         if (shootPressed)
         {
-            Shoot();
-            
-            
+            Shoot(); 
         
         }
-        SetAnimation(move, isJumping);
+        SetAnimation(move, isGrounded);
     }
 
-    void SetAnimation(float move, bool jump)
+    void SetAnimation(float move, bool isGrounded)
     {
         if(move != 0)
         {
@@ -123,12 +102,9 @@ public class PlayerController : MonoBehaviour
         {
             isRunning = false;
         }
-
-
-        Debug.Log("jump: " + jump);
         
         animator.SetBool("IsRunning", isRunning);
-        // animator.SetBool("IsJumping", jump) ;
+        animator.SetBool("IsJumping", !isGrounded) ;
 
 
         // void OnCollisionEnter(Collision col) {
@@ -141,35 +117,36 @@ public class PlayerController : MonoBehaviour
 
     void Shoot()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(firePoint.position, - firePoint.right, out hit, shootingRange)){
-        Debug.Log(hit.transform.name);
 
-            
+        facingRight = wizard.transform.eulerAngles.y == 90 ? true : false;
+
+        Plane playerPlane = new Plane(Vector3.forward, transform.position);
+
+        Ray mouseRay = cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        if (!playerPlane.Raycast(mouseRay, out float distance))
+            return;
+
+        Vector3 mouseWorldPos = mouseRay.GetPoint(distance);
+
+        Vector3 shootDir =
+            (mouseWorldPos - firePoint.position).normalized;
+
+        if (facingRight && shootDir.x < 0)
+        {
+            shootDir.x = 0;
+            shootDir.Normalize();
+        }
+        else if (!facingRight && shootDir.x > 0)
+        {
+            shootDir.x = 0;
+            shootDir.Normalize();
         }
 
+        Transform bullet =
+            Instantiate(fireball, firePoint.position, Quaternion.identity);
 
-         Vector3 mousePos = Mouse.current.position.ReadValue();
-         mousePos.z = 5f;
-         Vector3 worldMousePos = cam.ScreenToWorldPoint(mousePos);
-         worldMousePos.z = 0;
-         Vector3 firingAngle =  worldMousePos - transform.position.normalized;
-            
-         Debug.Log("mousePostoworld " + worldMousePos);
-
-          //Debug.Log(Vector3.Angle(transform.position, worldMousePos));
-         Vector3 angle = Vector3.zero;
-         angle.z = Vector3.Angle(transform.position, worldMousePos) - 90;
-         Quaternion quaternion = Quaternion.Euler(0,0,angle.z);
-         pointerObj.rotation = quaternion;
-
-         Transform fireballTransform = Instantiate(fireball, firePoint.position, Quaternion.identity);
-         // Vector3 shootDir = - firePoint.right;
-         Vector3 shootDir = firingAngle;
-         fireballTransform.GetComponent<fireball>().Setup(shootDir);
-
-        //Debug.DrawRay(hit.transform.position, - firePoint.right, Color.green, 2, false); 
-        
+        bullet.GetComponent<fireball>().Setup(shootDir);
     }
 
 
