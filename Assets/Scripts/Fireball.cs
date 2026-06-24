@@ -29,8 +29,17 @@ public class fireball : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider other)
     {
-        Destroy(collision.gameObject);
+        if(other.CompareTag("Enemy"))
+    {
+        other.GetComponent<EnemyController>()
+             .TakeDamage(20);
+
+        Destroy(gameObject);
     }
+    }
+
+
+
 }
