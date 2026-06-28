@@ -12,7 +12,7 @@ public class Cannon : MonoBehaviour
     void Update()
     {
 
-        if ((playerDistance.position.x - transform.position.x) <= triggerDistance)
+        if (Mathf.Abs(playerDistance.position.x - transform.position.x) <= triggerDistance)
         {
             timer += Time.deltaTime;
 
