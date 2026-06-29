@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Cannon
   bulletPrefab: {fileID: 5016923408206971141, guid: 8e3dc517950c316428348cabb11f0d1c, type: 3}
   firePoint: {fileID: 111592919454708860}
-  fireRate: 2
+  fireRate: 1.5
   playerDistance: {fileID: 0}
   triggerDistance: 10
 --- !u!1 &7361166894473823061

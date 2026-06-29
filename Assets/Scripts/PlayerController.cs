@@ -27,7 +27,6 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 4f;
 
     private bool isRunning;
-    private float shootingRange = 5f;
 
     void Awake()
     {
@@ -62,8 +61,6 @@ public class PlayerController : MonoBehaviour
 
         bool jumpPressed = playerInput.CharacterControls.Jump.triggered;
         bool shootPressed = playerInput.CharacterControls.Attack.triggered;
-
-        Debug.Log(!isGrounded);
 
         transform.Translate(Vector3.left * move * playerSpeed * Time.deltaTime);
         if(move == -1)
@@ -106,12 +103,6 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("IsRunning", isRunning);
         animator.SetBool("IsJumping", !isGrounded) ;
 
-
-        // void OnCollisionEnter(Collision col) {
-        // if (col.gameObject.CompareTag("Enemy"))
-        // {
-        //     animator.SetTrigger("Die");
-        // }
     }
 
 
@@ -129,8 +120,7 @@ public class PlayerController : MonoBehaviour
 
         Vector3 mouseWorldPos = mouseRay.GetPoint(distance);
 
-        Vector3 shootDir =
-            (mouseWorldPos - firePoint.position).normalized;
+        Vector3 shootDir = (mouseWorldPos - firePoint.position).normalized;
 
         if (facingRight && shootDir.x < 0)
         {
@@ -143,8 +133,7 @@ public class PlayerController : MonoBehaviour
             shootDir.Normalize();
         }
 
-        Transform bullet =
-            Instantiate(fireball, firePoint.position, Quaternion.identity);
+        Transform bullet = Instantiate(fireball, firePoint.position, Quaternion.identity);
 
         bullet.GetComponent<fireball>().Setup(shootDir);
     }

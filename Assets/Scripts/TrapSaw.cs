@@ -7,7 +7,7 @@ public class TrapSaw : MonoBehaviour
     [SerializeField] bool isTriggered = true;
     [SerializeField] float speed = 4f;
     [SerializeField] float rotationSpeed = 4f;
-    [SerializeField] int damage = 10;
+    [SerializeField] int damage = 15;
     [SerializeField] private Transform playerDistance;
     [SerializeField] private float triggerDistance = 10f;
     private bool movingRight;
@@ -43,7 +43,6 @@ public class TrapSaw : MonoBehaviour
 
         if(playerHealt != null)
         {
-            Debug.Log("hey");
             playerHealt.TakeDamage(damage);
         }
     }

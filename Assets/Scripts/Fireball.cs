@@ -22,10 +22,9 @@ public class fireball : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Mathf.Abs(spawnPos.x - transform.position.x) > distance)
+        if(Mathf.Abs(spawnPos.x - transform.position.x) > distance | Mathf.Abs(spawnPos.y - transform.position.y) > distance)
         {
             Destroy(gameObject);
-            // Debug.Log("spawn: " + spawnPos.x + "   current: " + transform.position.x);
         }
     }
 
