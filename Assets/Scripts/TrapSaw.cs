@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TrapSaw : MonoBehaviour
 {
-    [SerializeField] bool isTriggered = true;
     [SerializeField] float speed = 4f;
     [SerializeField] float rotationSpeed = 4f;
     [SerializeField] int damage = 15;
