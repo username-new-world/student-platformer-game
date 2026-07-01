@@ -40,7 +40,12 @@ public class PlayerController : MonoBehaviour
 
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
-  
+
+    void Start()
+    {
+        Time.timeScale = 1.2f;
+    }
+
     private void OnEnable()
     {
         playerInput.Enable();

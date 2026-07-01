@@ -3012,7 +3012,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu
+  m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9122,12 +9122,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1260690310}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: mainMenu
-        m_Mode: 1
+        m_MethodName: OpenLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -58626,11 +58626,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7139890226054990554, guid: 22caf6e22ddc6934cb6dbcdda9e3b28e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.13
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 7139890226054990554, guid: 22caf6e22ddc6934cb6dbcdda9e3b28e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.88
+      value: 2.43
       objectReference: {fileID: 0}
     - target: {fileID: 7139890226054990554, guid: 22caf6e22ddc6934cb6dbcdda9e3b28e, type: 3}
       propertyPath: m_LocalPosition.z

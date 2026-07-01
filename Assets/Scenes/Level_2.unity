@@ -4458,7 +4458,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1396396272383286208, guid: 8ea0877ede7226341b1e7c2dfb385df4, type: 3}
       propertyPath: fireRate
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1396396272383286208, guid: 8ea0877ede7226341b1e7c2dfb385df4, type: 3}
       propertyPath: playerDistance
@@ -5679,7 +5679,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Menu
+  m_text: Next
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7956,7 +7956,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1396396272383286208, guid: 8ea0877ede7226341b1e7c2dfb385df4, type: 3}
       propertyPath: fireRate
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1396396272383286208, guid: 8ea0877ede7226341b1e7c2dfb385df4, type: 3}
       propertyPath: playerDistance
@@ -9141,7 +9141,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1396396272383286208, guid: 8ea0877ede7226341b1e7c2dfb385df4, type: 3}
       propertyPath: fireRate
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1396396272383286208, guid: 8ea0877ede7226341b1e7c2dfb385df4, type: 3}
       propertyPath: playerDistance
@@ -9214,7 +9214,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1396396272383286208, guid: 8ea0877ede7226341b1e7c2dfb385df4, type: 3}
       propertyPath: fireRate
-      value: 5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 1396396272383286208, guid: 8ea0877ede7226341b1e7c2dfb385df4, type: 3}
       propertyPath: playerDistance
@@ -9829,12 +9829,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1527359408}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: mainMenu
-        m_Mode: 1
+        m_MethodName: OpenLevel
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -14951,6 +14951,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1768989846}
   - component: {fileID: 1768989847}
+  - component: {fileID: 1768989848}
   m_Layer: 0
   m_Name: Goal
   m_TagString: Untagged
@@ -14994,6 +14995,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1768989848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1768989845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562c02655fd90d74db4fbcc694f718b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FinishTrigger
 --- !u!4 &1777937446 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6225354185025647697, guid: b33e25ce0c7337c449953a7b559b3400, type: 3}
