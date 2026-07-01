@@ -5,7 +5,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] int maxHealth = 100;
     [SerializeField] HealthBar healthBar;
-    [SerializeField] GameObject gameOverScreen;
+
     AudioManager audioManager;
     int currentHealth;
 
@@ -36,8 +36,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Dead()
     {
-        Time.timeScale = 0f;
-        gameOverScreen.SetActive(true);
+        GameManager.Instance.Lose();
         audioManager.playSFX(audioManager.playerDeath);
     }
 }

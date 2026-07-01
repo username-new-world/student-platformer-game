@@ -20,11 +20,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] GameObject pauseMenu;
     
     AudioManager audioManager;
 
     bool isGrounded;
 
+    bool isPaused;
     public float playerSpeed = 4f;
     public float jumpForce = 4f;
 
@@ -51,7 +53,20 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
+        if (playerInput.CharacterControls.Pause.triggered)
+        {
+            isPaused = pauseMenu.activeSelf;
+            pauseMenu.SetActive(!pauseMenu.activeSelf);
+            Time.timeScale = pauseMenu.activeSelf ? 0f : 1.2f;
+        }
+
+
+        if (isPaused)
+            return;
+
         Movement();
+
+
         
     }
 
