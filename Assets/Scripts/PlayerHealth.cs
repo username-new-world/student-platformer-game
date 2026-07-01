@@ -6,9 +6,15 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] int maxHealth = 100;
     [SerializeField] HealthBar healthBar;
     [SerializeField] GameObject gameOverScreen;
-
+    AudioManager audioManager;
     int currentHealth;
 
+
+    void Awake()
+    {   
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+
+    }
     void Start()
     {
         currentHealth = maxHealth;
@@ -19,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
+        audioManager.playSFX(audioManager.playerDamage);
 
         if(currentHealth <= 0)
         {
@@ -31,5 +38,6 @@ public class PlayerHealth : MonoBehaviour
     {
         Time.timeScale = 0f;
         gameOverScreen.SetActive(true);
+        audioManager.playSFX(audioManager.playerDeath);
     }
 }

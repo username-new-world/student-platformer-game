@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Transform groundCheck;
     [SerializeField] float groundCheckRadius = 0.2f;
     [SerializeField] LayerMask groundLayer;
+    
+    AudioManager audioManager;
 
     bool isGrounded;
 
@@ -33,6 +35,8 @@ public class PlayerController : MonoBehaviour
         playerInput = new PlayerInputAction();
         animator = GetComponent<Animator>();
         playerRigidbody = GetComponent<Rigidbody>();
+
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
     }
   
     private void OnEnable()
@@ -132,6 +136,8 @@ public class PlayerController : MonoBehaviour
             shootDir.x = 0;
             shootDir.Normalize();
         }
+
+        audioManager.playSFX(audioManager.playerShoot);
 
         Transform bullet = Instantiate(fireball, firePoint.position, Quaternion.identity);
 

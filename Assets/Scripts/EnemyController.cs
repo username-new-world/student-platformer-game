@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class EnemyController : MonoBehaviour
     int currentHealth;
     bool isDead;
     bool canAttack = true;
+    bool isFinalLevel = false;
 
     void Start()
     {
@@ -26,6 +28,11 @@ public class EnemyController : MonoBehaviour
 
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
+        if(SceneManager.GetActiveScene().name == "Level_3")
+        {
+            isFinalLevel = true;
+        }
     }
 
     void Update()
@@ -48,6 +55,7 @@ public class EnemyController : MonoBehaviour
         }
 
         FacePlayer();
+
     }
 
     void Idle()
@@ -129,17 +137,24 @@ public class EnemyController : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+            
         }
     }
 
     void Die()
     {
+
         isDead = true;
 
         agent.isStopped = true;
 
         animator.SetTrigger("Die");
 
+        if (isFinalLevel)
+            {
+                GameManager.Instance.Win();
+            }
+        
         Destroy(gameObject, 2f);
     }
 }
